@@ -4,13 +4,10 @@ import Points from "./Points";
 
 function TodoList() {
   const [points, setPoints] = useState([]);
-  const [texts, setTexts] = useState([]);
 
   const addPoint = (point) => {
     const newPoints = [point, ...points];
-    const newTexts = [point.text, ...texts];
     setPoints(newPoints);
-    setTexts(newTexts);
     console.log(point);
   };
 
@@ -19,12 +16,23 @@ function TodoList() {
     setPoints(removePoints);
   };
 
+  const updateList = (edit, point) => {
+    const newPoints = points.map((item) =>
+      item.id === edit.id ? { id: edit.id, text: point.text } : item
+    );
+    setPoints(newPoints);
+    console.log({ id: edit.id, text: point.text });
+  };
+
   return (
     <div>
       <h1>Todo List</h1>
-      <Form onSubmit={addPoint} />
-      <Points points={points} removePoint={removePoint} />
-      {/* {texts} */}
+      <Form onSubmit={addPoint} placeholder={"Enter a todo"} />
+      <Points
+        points={points}
+        removePoint={removePoint}
+        updateList={updateList}
+      />
     </div>
   );
 }

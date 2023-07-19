@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Form({ onSubmit }) {
+function Form({ onSubmit, placeholder }) {
   const [input, setInput] = useState("");
   const [num, setNum] = useState(0);
 
@@ -20,7 +20,7 @@ function Form({ onSubmit }) {
       <input
         className="todo-input"
         type="text"
-        placeholder="Enter a todo"
+        placeholder={placeholder}
         value={input}
         onChange={handleChange}
       />
